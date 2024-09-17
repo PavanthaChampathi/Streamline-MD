@@ -20,6 +20,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
 
+ownerNumbers = config.OWNER_NUMBER
+
 let qrCodeData = ""; // To store the generated QR code
 
 //=============================================
