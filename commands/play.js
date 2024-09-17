@@ -1,18 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const { cmd, commands } = require('../command');
-const config = require('../config');
-const yts = require('yt-search');
-const fg = require('api-dylux');
-
 const menuMessageIds = new Map(); // Track the message IDs to check replies
-
-// Helper function to format numbers for views
-const formatNumber = (num) => {
-    if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
-    if (num >= 1_000) return `${(num / 1_000).toFixed(1)}K`;
-    return num.toString();
-};
+const downloadData = new Map(); // Store download data (e.g., URLs) for each conversation
 
 // Play command handler
 cmd({
@@ -67,11 +54,15 @@ To Get The Files Send:
 ${config.BOTTOM_FOOTER}`;
 
         // Send message with search result and track its ID
-        // Send message with search result and track its ID
         const searchMessage = await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
         let down = await fg.yta(url); // Await the promise returned by fg.yta
         if (!down || !down.dl_url) return reply("Failed to get the download URL.");
-        menuMessageIds.set(from, searchMessage.key.id); // Save the message ID to check replies
+
+        // Store the download data for this conversation
+        downloadData.set(from, down);
+
+        // Save the message ID to check replies
+        menuMessageIds.set(from, searchMessage.key.id);
 
     } catch (e) {
         console.error(e);
@@ -92,23 +83,22 @@ cmd({
             return reply("Please enter a valid number between 1 and 4.");
         }
 
+        // Retrieve the stored download data for this conversation
+        const down = downloadData.get(from);
+        if (!down || !down.dl_url) return reply("No download data available.");
+
         // Handle the user's choice for downloading audio/video based on the reply
         switch (selectedOption) {
             case 1:
                 // Handle Audio download
                 reply("🎶 Downloading Audio...");
-                let audio = await fg.yta(m.quoted.body); // Download audio
-                if (audio && audio.dl_url) {
-                    await conn.sendMessage(from, { document: { url: audio.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio file!" }, { quoted: m });
-                } else {
-                    reply("Failed to download audio.");
-                }
+                await conn.sendMessage(from, { document: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio file!" }, { quoted: m });
                 break;
 
             case 2:
                 // Handle Video download
                 reply("🎬 Downloading Video...");
-                let video = await fg.ytv(m.quoted.body); // Download video
+                let video = await fg.ytv(down.dl_url); // Download video using the same URL
                 if (video && video.dl_url) {
                     await conn.sendMessage(from, { document: { url: video.dl_url }, mimetype: 'video/mp4', caption: "Here's your video file!" }, { quoted: m });
                 } else {
@@ -119,18 +109,13 @@ cmd({
             case 3:
                 // Handle Audio Document
                 reply("🎵 Preparing Audio Doc...");
-                let audioDoc = await fg.yta(m.quoted.body); // Get audio for doc
-                if (audioDoc && audioDoc.dl_url) {
-                    await conn.sendMessage(from, { document: { url: audioDoc.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio document!" }, { quoted: m });
-                } else {
-                    reply("Failed to prepare audio document.");
-                }
+                await conn.sendMessage(from, { document: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio document!" }, { quoted: m });
                 break;
 
             case 4:
                 // Handle Video Document
                 reply("📹 Preparing Video Doc...");
-                let videoDoc = await fg.ytv(m.quoted.body); // Get video for doc
+                let videoDoc = await fg.ytv(down.dl_url); // Get video for doc using the same URL
                 if (videoDoc && videoDoc.dl_url) {
                     await conn.sendMessage(from, { document: { url: videoDoc.dl_url }, mimetype: 'video/mp4', caption: "Here's your video document!" }, { quoted: m });
                 } else {
@@ -148,4 +133,3 @@ cmd({
         reply(`Error: ${e.message}`);
     }
 });
-
