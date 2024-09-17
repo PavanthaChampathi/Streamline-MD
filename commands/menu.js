@@ -7,8 +7,18 @@ const IMG_PATH = path.join(__dirname, '../images');
 const menuMessageIds = new Map();
 
 // Format the commands for each section
-const formatCommands = (commandList) => 
-    commandList.split('\n').filter(cmd => cmd).map(cmd => `║------- ${cmd}`).join('\n');
+const formatCommands = (commandList) => {
+    // Check if commandList is undefined or empty
+    if (!commandList || commandList.trim() === "") {
+        return "No commands available for this category.";
+    }
+    
+    // Proceed with formatting the command list
+    return commandList.split('\n')
+        .filter(cmd => cmd)  // Remove empty lines
+        .map(cmd => `║------- ${cmd}`)  // Format each command
+        .join('\n');  // Join commands with new lines
+};
 
 // Menu command handler
 cmd({
@@ -85,9 +95,9 @@ cmd({
             2: `this is not configured yet`,
             3: `╔═〘 AI 〙═╗\n║\n${formatCommands(menu.ai)}\n║\n╚═━─────●●►`,
             4: `╔═〘 SEARCH 〙═╗\n║\n${formatCommands(menu.search)}\n║\n╚═━─────●●►`,
-            5: `╔═〘 DOWNLOAD 〙═╗\n║\n${formatCommands(menu.downlode)}\n║\n╚═━─────●●►`,
-            6: `╔═〘 MAIN 〙═╗\n║\n${formatCommands(menu.main)}\n║\n╚═━─────●●►`,
-            7: `╔═〘 GROUP 〙═╗\n║\n${formatCommands(menu.group)}\n║\n╚═━─────●●►`,
+            5: `╔═〘 DOWNLOAD 〙═╗\n║\n${formatCommands(menu.download)}\n║\n╚═━─────●●►`,
+            6: `╔═〘 MATHTOOL 〙═╗\n║\n${formatCommands(menu.mathtool)}\n║\n╚═━─────●●►`,
+            7: `╔═〘 MAIN 〙═╗\n║\n${formatCommands(menu.main)}\n║\n╚═━─────●●►`,
             8: `this is not configured yet`,
             9: `this is not configured yet`,
             10: `this is not configured yet`
