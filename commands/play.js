@@ -106,7 +106,7 @@ cmd({
             case 1:
                 // Handle Audio download
                 reply("🎶 Downloading Audio...");
-                await conn.sendMessage(from, { document: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio file!" }, { quoted: m });
+                await conn.sendMessage(from, { audio: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio file!" }, { quoted: m });
                 break;
 
             case 2:
@@ -114,7 +114,7 @@ cmd({
                 reply("🎬 Downloading Video...");
                 let video = await fg.ytv(down.dl_url); // Download video using the same URL
                 if (video && video.dl_url) {
-                    await conn.sendMessage(from, { document: { url: video.dl_url }, mimetype: 'video/mp4', caption: "Here's your video file!" }, { quoted: m });
+                    await conn.sendMessage(from, { video: { url: video.dl_url }, mimetype: 'video/mp4', caption: "Here's your video file!" }, { quoted: m });
                 } else {
                     reply("Failed to download video.");
                 }
