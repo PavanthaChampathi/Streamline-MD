@@ -1,5 +1,19 @@
+const fs = require('fs');
+const path = require('path');
+const { cmd, commands } = require('../command');
+const config = require('../config');
+const yts = require('yt-search');
+const fg = require('api-dylux');
+
 const menuMessageIds = new Map(); // Track the message IDs to check replies
 const downloadData = new Map(); // Store download data (e.g., URLs) for each conversation
+
+// Helper function to format numbers for views
+const formatNumber = (num) => {
+    if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
+    if (num >= 1_000) return `${(num / 1_000).toFixed(1)}K`;
+    return num.toString();
+};
 
 // Play command handler
 cmd({
