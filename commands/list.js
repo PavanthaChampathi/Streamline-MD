@@ -1,4 +1,4 @@
-const config = ('../config')
+const config = require('../config');
 const {cmd, commands} = require('../command');
 const path = require('path');
 
