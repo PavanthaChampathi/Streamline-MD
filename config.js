@@ -21,6 +21,7 @@ module.exports = {
     BOTTOM_FOOTER: "𝓢𝓣𝓡𝓔𝓐𝓜𝓛𝓘𝓝𝓔-𝓜𝓓",
     PREFIX:".",
     AUTO_READ_STATUS:"true",
+    "ALIVE_MSG":"👋 Hello I'm,\n🌐 Streamline-MD 🌟\n✨ I'm alive now! ✨\n\n📜To get the commands📜 send .menu",
 
     OWNER_NAME: process.env.OWNER_NAME || "Pavantha Champathi",
     OWNER_NUMBER: process.env.OWNER_NUMBER || "94713829670",
