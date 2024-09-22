@@ -15,7 +15,7 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
     m.react("✨")
-    conn.sendMessage(from, image: { url: path.join(IMG_PATH, 'ALIVE_IMG.jpg') },, { quoted: mek });
+    conn.sendMessage(from, {image: { url: path.join(IMG_PATH, 'ALIVE_IMG.jpg') },caption: config.ALIVE_MSG}, { quoted: mek });
 }catch(e){
 console.log(e)
 reply(`${e}`)
