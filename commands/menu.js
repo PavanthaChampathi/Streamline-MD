@@ -144,8 +144,6 @@ cmd({
             return reply("❌ Invalid category selected.");
         }
 
-        const config = await readEnv();
-
         // Initialize menu object with all possible categories
         const menu = {
             owner: '',
