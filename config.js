@@ -19,6 +19,8 @@ module.exports = {
     MONGODB: process.env.MONGODB || "//mongo:thVCdVUqJrvFHcejdnDFcpLEDaVaedsd@junction.proxy.rlwy.net:26885",
 
     BOTTOM_FOOTER: "𝓢𝓣𝓡𝓔𝓐𝓜𝓛𝓘𝓝𝓔-𝓜𝓓",
+    PREFIX:".",
+    AUTO_READ_STATUS:"true",
 
     OWNER_NAME: process.env.OWNER_NAME || "Pavantha Champathi",
     OWNER_NUMBER: process.env.OWNER_NUMBER || "94713829670",
