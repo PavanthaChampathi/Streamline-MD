@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 const path = require('path');
 const { cmd, commands } = require('../command');
 const config = require('../config');
@@ -146,4 +146,4 @@ cmd({
         console.error(e);
         reply(`Error: ${e.message}`);
     }
-});
+});*/

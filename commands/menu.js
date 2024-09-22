@@ -3,64 +3,102 @@ const path = require('path');
 const { readEnv } = require('../lib/database');
 const { cmd, commands } = require('../command');
 
+// Path to images directory
 const IMG_PATH = path.join(__dirname, '../images');
+
+// Map to store menu message IDs for each user
 const menuMessageIds = new Map();
 
-// Format the commands for each section
+/**
+ * Formats the command list for display.
+ * @param {string} commandList - Commands separated by newlines.
+ * @returns {string} - Formatted command string.
+ */
 const formatCommands = (commandList) => {
-    // Check if commandList is undefined or empty
-    if (!commandList || commandList.trim() === "") {
-        return "No commands available for this category.";
+    if (!commandList) {
+        return '║  No commands available.\n';
     }
-    
-    // Proceed with formatting the command list
-    return commandList.split('\n')
-        .filter(cmd => cmd)  // Remove empty lines
-        .map(cmd => `║------- ${cmd}`)  // Format each command
-        .join('\n');  // Join commands with new lines
+
+    return commandList
+        .split('\n')
+        .filter(cmd => cmd.trim())
+        .map(cmd => `║------- ${cmd}`)
+        .join('\n') + '\n';
 };
 
-// Menu command handler
+// Menu Command Handler
 cmd({
     pattern: "menu",
-    desc: "Get cmd list",
+    desc: "Get command list",
     category: "main",
     filename: __filename
 }, async (conn, mek, m, { from, pushname, reply }) => {
     try {
         const config = await readEnv();
-        const menu = commands.reduce((acc, cmd) => {
-            if (cmd.pattern && !cmd.dontAddCommandList) {
-                acc[cmd.category] = (acc[cmd.category] || '') + `${config.PREFIX}${cmd.pattern}\n`;
-            }
-            return acc;
-        }, {});
 
-        const madeMenu = 
-`╔═〘 ᴡᴇʟᴄᴏᴍᴇ, ${pushname} 〙═╗
+        // Initialize menu object with all possible categories
+        const menu = {
+            owner: '',
+            convert: '',
+            ai: '',
+            search: '',
+            download: '',
+            mathtool: '',
+            main: '',
+            group: '',
+            sticker: '',
+            game: ''
+        };
+
+        // Populate the menu object with commands categorized
+        commands.forEach(cmdItem => {
+            if (cmdItem.pattern && !cmdItem.dontAddCommandList) {
+                const category = cmdItem.category.toLowerCase();
+                if (menu[category] !== undefined) {
+                    menu[category] += `${config.PREFIX}${cmdItem.pattern}\n`;
+                }
+            }
+        });
+
+        // Define menu categories with numbers
+        const categories = [
+            { number: 1, name: 'OWNER' },
+            { number: 2, name: 'CONVERT' },
+            { number: 3, name: 'AI' },
+            { number: 4, name: 'SEARCH' },
+            { number: 5, name: 'DOWNLOAD' },
+            { number: 6, name: 'MATHTOOL' },
+            { number: 7, name: 'MAIN' },
+            { number: 8, name: 'GROUP' },
+            { number: 9, name: 'STICKER' },
+            { number: 10, name: 'GAME' }
+        ];
+
+        // Create the menu message
+        let madeMenu = `╔═〘 ᴡᴇʟᴄᴏᴍᴇ, ${pushname} 〙═╗
 ║  
 ╠═〘 ᴄᴏᴍᴍᴀɴᴅꜱ 〙═
 ║  
-║  1  OWNER
-║  2  CONVERT
-║  3  AI
-║  4  SEARCH
-║  5  DOWNLOAD
-║  6  MATHTOOL
-║  7  MAIN
-║  8  GROUP
-║  9  STICKER
-║ 10 GAME
-╚═━─────●●►
+`;
+
+        categories.forEach(category => {
+            madeMenu += `║  ${category.number}  ${category.name}\n`;
+        });
+
+        madeMenu += `╚═━─────●●►
 
 🌟 *Reply with the Number you want to select*`;
 
+        // React to the menu command
         m.react("📜");
+
+        // Send the menu message with an image
         const menuMessage = await conn.sendMessage(from, {
             image: { url: path.join(IMG_PATH, 'BOTLOGOL_IMG.png') },
             caption: madeMenu
         }, { quoted: mek });
 
+        // Store the message ID to verify replies
         menuMessageIds.set(from, menuMessage.key.id);
 
     } catch (e) {
@@ -69,41 +107,93 @@ cmd({
     }
 });
 
-// Menu reply handler
+// Menu Reply Handler
 cmd({
     on: "body"
 }, async (conn, mek, m, { from, body, reply }) => {
     try {
-        const config = await readEnv();
-        const menu = commands.reduce((acc, cmd) => {
-            if (cmd.pattern && !cmd.dontAddCommandList) {
-                acc[cmd.category] = (acc[cmd.category] || '') + `${config.PREFIX}${cmd.pattern}\n`;
-            }
-            return acc;
-        }, {});
-
+        // Retrieve the stored menu message ID
         const menuMessageId = menuMessageIds.get(from);
+        if (!menuMessageId) return; // No active menu for this user
+
+        // Check if the message is a reply to the menu message
         if (!m.quoted || m.quoted.id !== menuMessageId) return;
 
-        const selectedOption = parseInt(body);
+        // Parse the user's selection
+        const selectedOption = parseInt(body.trim());
         if (isNaN(selectedOption) || selectedOption < 1 || selectedOption > 10) {
-            return reply("Please enter a valid number between 1 and 10.");
+            return reply("❌ Please enter a valid number between 1 and 10.");
         }
 
-        const menuContent = {
-            1: `╔═〘 OWNER 〙═╗\n║\n${formatCommands(menu.owner)}\n║\n╚═━─────●●►`,
-            2: `this is not configured yet`,
-            3: `╔═〘 AI 〙═╗\n║\n${formatCommands(menu.ai)}\n║\n╚═━─────●●►`,
-            4: `╔═〘 SEARCH 〙═╗\n║\n${formatCommands(menu.search)}\n║\n╚═━─────●●►`,
-            5: `╔═〘 DOWNLOAD 〙═╗\n║\n${formatCommands(menu.download)}\n║\n╚═━─────●●►`,
-            6: `╔═〘 MATHTOOL 〙═╗\n║\n${formatCommands(menu.mathtool)}\n║\n╚═━─────●●►`,
-            7: `╔═〘 MAIN 〙═╗\n║\n${formatCommands(menu.main)}\n║\n╚═━─────●●►`,
-            8: `this is not configured yet`,
-            9: `this is not configured yet`,
-            10: `this is not configured yet`
+        // Define the categories with their corresponding keys
+        const categoryKeys = {
+            1: 'owner',
+            2: 'convert',
+            3: 'ai',
+            4: 'search',
+            5: 'download',
+            6: 'mathtool',
+            7: 'main',
+            8: 'group',
+            9: 'sticker',
+            10: 'game'
         };
 
-        await conn.sendMessage(from, { text: menuContent[selectedOption] }, { quoted: m });
+        // Retrieve the commands for the selected category
+        const selectedCategory = categoryKeys[selectedOption];
+        if (!selectedCategory) {
+            return reply("❌ Invalid category selected.");
+        }
+
+        const config = await readEnv();
+
+        // Initialize menu object with all possible categories
+        const menu = {
+            owner: '',
+            convert: '',
+            ai: '',
+            search: '',
+            download: '',
+            mathtool: '',
+            main: '',
+            group: '',
+            sticker: '',
+            game: ''
+        };
+
+        // Populate the menu object with commands categorized
+        commands.forEach(cmdItem => {
+            if (cmdItem.pattern && !cmdItem.dontAddCommandList) {
+                const category = cmdItem.category.toLowerCase();
+                if (menu[category] !== undefined) {
+                    menu[category] += `${config.PREFIX}${cmdItem.pattern}\n`;
+                }
+            }
+        });
+
+        // Format the commands for the selected category
+        const formattedCommands = formatCommands(menu[selectedCategory]);
+
+        // Define content for each category
+        const menuContent = {
+            owner: `╔═〘 OWNER 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            convert: `╔═〘 CONVERT 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
+            ai: `╔═〘 AI 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            search: `╔═〘 SEARCH 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            download: `╔═〘 DOWNLOAD 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            mathtool: `╔═〘 MATHTOOL 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
+            main: `╔═〘 MAIN 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            group: `╔═〘 GROUP 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
+            sticker: `╔═〘 STICKER 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
+            game: `╔═〘 GAME 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`
+        };
+
+        // Fetch the appropriate content
+        const responseContent = menuContent[selectedCategory] || '║  No commands available.\n';
+
+        // Send the response
+        await conn.sendMessage(from, { text: responseContent }, { quoted: m });
+
     } catch (e) {
         console.error(e);
         reply && reply(`Error: ${e.message}`);

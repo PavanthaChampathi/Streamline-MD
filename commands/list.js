@@ -15,7 +15,7 @@ async(conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sende
         const config = await readEnv();
         let menu = {
             main: '',
-            downlode: '',
+            download: '',
             group: '',
             owner: '',
             convert: '',
@@ -53,7 +53,7 @@ ${formatCommands(menu.ai)}
 ${formatCommands(menu.search)}
 ║
 ║===== DOWNLOAD
-${formatCommands(menu.downlode)}
+${formatCommands(menu.download)}
 ║
 ║===== MATHTOOL
 ║

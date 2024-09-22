@@ -9,7 +9,7 @@ const IMG_PATH = path.join(__dirname, '../images');
 
 cmd({
     pattern: "system",
-    alias: ["status", "botinfo","info","infobot"],
+    alias: ["status", "botinfo","info","infobot","uptime"],
     desc: "Check uptime, RAM usage, CPU info, network interfaces, and more",
     category: "main",
     filename: __filename

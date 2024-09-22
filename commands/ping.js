@@ -9,15 +9,13 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        const start = new Date().getTime(); // Record start time
-        await m.react("⏳");
-        const end = new Date().getTime(); // Record end time
+        const start = new Date().getTime();
+        await m.react('⚡');
+        const end = new Date().getTime();
+        const responseTime = (end - start) / 1000;
 
-        const responseTime = end - start; // Response time in milliseconds
-        // Send the formatted message
-        m.react("📍")
-        //.than conn.sendMessage(from, { text: `📍 Pong ${responseTime} Ms` }, { quoted: mek });
-        .then(() => reply(`📍 Pong ${responseTime} Ms`))
+        reply(`🔥 ℬ𝓞𝑇 𝓢𝓟𝓔𝓔𝓓:  ${responseTime.toFixed(2)} ꌗ`)
+
     } catch (e) {
         console.log(e);
         reply(`⚠️ Error: ${e.message}`);
