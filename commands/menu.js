@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { readEnv } = require('../lib/database');
+const config = require('../config');
 const { cmd, commands } = require('../command');
 
 // Path to images directory
@@ -34,7 +34,6 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, pushname, reply }) => {
     try {
-        const config = await readEnv();
 
         // Initialize menu object with all possible categories
         const menu = {
