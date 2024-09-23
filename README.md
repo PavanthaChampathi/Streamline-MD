@@ -35,7 +35,8 @@
 
 
 
-**WAITING FOR NEXT UPDATE QUEEN AMIRA V3**
+
+**WAITING FOR NEXT UPDATE......**
 
 <img src="https://i.imgur.com/dBaSKWF.gif" height="90" width="100%">
 
