@@ -174,7 +174,7 @@ cmd({
         // Define content for each category
         const menuContent = {
             owner: `╔═〘 OWNER 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
-            convert: `╔═〘 CONVERT 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
+            convert: `╔═〘 CONVERT 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             ai: `╔═〘 AI 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             search: `╔═〘 SEARCH 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             download: `╔═〘 DOWNLOAD 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
