@@ -16,7 +16,7 @@
 
  <p align="center">  
  <a href="[https://telegra.ph/file/3206b7e657f890040c5bf.jpg](https://telegra.ph/file/3206b7e657f890040c5bf.jpg)">
-    <img alt="ꜱᴛʀᴇᴀᴍʟɪɴᴇ ᴍᴅ" height="300" src="https://raw.githubusercontent.com/PavanthaChampathi/Streamline-MD/refs/heads/main/images/BOTLOGOL_IMG.png?token=GHSAT0AAAAAACX3XHKZGOEEUTY57ZGCWJZAZXRFT5Q">
+    <img alt="ꜱᴛʀᴇᴀᴍʟɪɴᴇ ᴍᴅ" height="300" src="https://github.com/PavanthaChampathi/Streamline-MD/blob/main/images/BOTLOGOL_IMG.png?raw=true">
 
    <p align="center">
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ff00ab&center=true&vCenter=true&multiline=false&lines=CYBER+TITANS+2024" alt="">
