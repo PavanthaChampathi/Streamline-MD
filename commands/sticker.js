@@ -9,7 +9,7 @@ cmd({
     pattern: 'sticker',
     desc: 'Convert image to WhatsApp sticker.',
     alias: ["s", "st"],
-    category: 'media',
+    category: 'convert',
     filename: __filename
 },
 async (conn, mek, m, { quoted, isMedia, isImage, reply }) => {
