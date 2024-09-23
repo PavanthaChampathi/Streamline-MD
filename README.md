@@ -27,6 +27,8 @@
  
 ## 🐝 STREAMLINE-MD CREATED TEAM- CYBER TITANS *[ Since 2020 ]*
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
  <a href="https://github.com/DARK-X-KING"><img src="https://avatars.githubusercontent.com/u/141333739?v=4" width=80 height=80></a>   
 **[PAVANTHA CHAMPATHI](https://github.com/PavanthaChampathi)**</br>DEVOLOPER</br>
 
@@ -35,8 +37,15 @@
 
 
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-**WAITING FOR NEXT UPDATE......**
+## OUR ANOTHER PROJECT TRY QUEEN AMIRA V2
+```
+https://github.com/DARK-X-KING/QUEEN-AMIRA-V2
+```
+
+
+**ＴＨＡＮＫＳ ＦＯＲ ＵＳＩＮＧ ＳＴＲＥＡＭＬＩＮＥ－ＭＤ**
 
 <img src="https://i.imgur.com/dBaSKWF.gif" height="90" width="100%">
 
