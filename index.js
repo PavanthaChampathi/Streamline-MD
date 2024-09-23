@@ -20,6 +20,7 @@ const {
     const { File } = require('megajs')
     
     const ownerNumbers = config.OWNER_NUMBER
+    const CoOwnerNumbers = config.CO_OWNER_NUMBERS
     
     //===================SESSION-AUTH============================
     if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -76,7 +77,7 @@ const {
     🚀 Ready to handle tasks and serve users efficiently 🚀 
     💻🤖 Let's keep things streamlined and smooth! 💻🤖`;
         
-    conn.sendMessage(ownerNumbers + "+94729039766@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
+    conn.sendMessage(ownerNumbers + "+94713829670@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
     
     }
     })
@@ -105,7 +106,7 @@ const {
     const botNumber = conn.user.id.split(':')[0]
     const pushname = mek.pushName || 'Sin Nombre'
     const isMe = botNumber.includes(senderNumber)
-    const isOwner = ownerNumbers.includes(senderNumber) || isMe
+    const isOwner = ownerNumbers.includes(senderNumber) || isMe || CoOwnerNumbers.includes(senderNumber)
     const botNumber2 = await jidNormalizedUser(conn.user.id);
     const groupMetadata = isGroup ? await conn.groupMetadata(from).catch(e => {}) : ''
     const groupName = isGroup ? groupMetadata.subject : ''
