@@ -76,7 +76,7 @@ const {
     🚀 Ready to handle tasks and serve users efficiently 🚀 
     💻🤖 Let's keep things streamlined and smooth! 💻🤖`;
         
-    conn.sendMessage(ownerNumbers + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
+    conn.sendMessage(ownerNumbers + "+94729039766@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
     
     }
     })
