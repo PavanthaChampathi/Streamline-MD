@@ -44,6 +44,7 @@ async(conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sende
 ${formatCommands(menu.owner)}
 ║
 ║===== CONVERT
+${formatCommands(menu.convert)}
 ║
 ║===== AI
 ${formatCommands(menu.ai)}
@@ -54,17 +55,11 @@ ${formatCommands(menu.search)}
 ║===== DOWNLOAD
 ${formatCommands(menu.download)}
 ║
-║===== MATHTOOL
-║
 ║===== MAIN
 ${formatCommands(menu.main)}
 ║
 ║===== GROUP
 ${formatCommands(menu.group)}
-║
-║===== STICKER
-║
-║===== GAME
 ║  
 ╚═━─────●●►
 
