@@ -18,7 +18,7 @@ module.exports = {
 
     MONGODB: process.env.MONGODB || "//mongo:thVCdVUqJrvFHcejdnDFcpLEDaVaedsd@junction.proxy.rlwy.net:26885",
 
-    BOTTOM_FOOTER: "𝓢𝓣𝓡𝓔𝓐𝓜𝓛𝓘𝓝𝓔-𝓜𝓓",
+    BOTTOM_FOOTER: "​🇸​​🇹​​🇷​​🇪​​🇦​​🇲​​🇱​​🇮​​🇳​​🇪​ ​🇸​​🇾​​🇸​​🇹​​🇪​​🇲​",
     PREFIX:".",
     AUTO_READ_STATUS:"true",
     "ALIVE_MSG":"👋 Hello I'm,\n🌐 Streamline-MD 🌟\n✨ I'm alive now! ✨\n\n📜To get the commands📜 send .menu",
