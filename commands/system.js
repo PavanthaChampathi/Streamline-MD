@@ -27,7 +27,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 📊 *CPU Info:* ${cpuInfo.model} (${cpuInfo.speed} MHz)
 🖥️ *Platform:* ${os.platform()} ${os.release()}
 
-✨BOT Made by Pavantha ✨
+✨ᴅᴇᴠᴏʟᴏᴘᴇʀꜱ- ᴘᴀᴠᴀɴᴛʜᴀ ᴄʜᴀᴍᴘᴀᴛʜɪ & ᴅᴀʀᴋ-x-ᴋɪɴɢ ✨
 `;     
         m.react("🧬");
         await conn.sendMessage(from, { 
