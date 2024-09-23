@@ -28,6 +28,6 @@ module.exports = {
     OWNER_EMAIL: process.env.OWNER_EMAIL || "pavanthachampathi@gmail.com",
     OWNER_COMPANY: process.env.OWNER_COMPANY || "Future Innovations LK", 
 
-    CO_OWNER_NUMBERS: process.env.CO_OWNER_NUMBERS ? process.env.CO_OWNER_NUMBERS.split(',') : ['94729039766'],
+    CO_OWNER_NUMBERS: "94729039766",
 
 };
