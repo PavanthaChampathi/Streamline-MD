@@ -35,7 +35,7 @@ cmd({
         // Mute the group
         m.react("✅");
         await conn.groupSettingUpdate(mek.chat, 'announcement');
-        await conn.sendMessage(from, { text: 'The group has been muted. Only group admins can send messages.' , quoted: mek });
+        await conn.sendMessage(from, { text: '🔇 *The group has been muted!* 🔇\n\n✨ Now Only group admins can send messages.' , quoted: mek });
     } catch (e) {
         reply(`Error: ${e.message}`);
         console.log(e);
@@ -46,22 +46,38 @@ cmd({
 // Unmute Group Command
 cmd({
     pattern: "unmute",
-    react: "🔖",
-    desc: "Open a group",
+    desc: "Unmute the chat, allowing all members to send messagesp",
     category: "group",
     use: '.unmute',
     filename: __filename
 }, async (conn, mek, m, { from, prefix, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        if (!isGroup) return reply(ONLGROUP);
-        if (!isBotAdmins) return reply(botAdmin);
-        if (!isAdmins) return reply(ADMIN);
+        // Check if the command is used in a group
+        if (!isGroup) {
+            m.react('🚫')  // React with 'no entry' emoji for non-group command
+                .then(() => reply("❌ This command can only be used in a group chat."));
+            return;
+        }
+        // Check if the bot is an admin
+        if (!isBotAdmins) {
+            m.react('⚠️')  // React with a warning emoji
+                .then(() => reply("❌ I need admin privileges to execute this command. Please make me an admin!"));
+            return;
+        }
+        // Check if the user is an admin or the owner
+        if (!isAdmins && !isOwner) {
+            m.react('🔒')  // React with 'lock' emoji
+                .then(() => reply("❌ Only group admins can use this command."));
+            return;
+        }
 
+        // Mute the group
+        m.react("✅");
         await conn.groupSettingUpdate(mek.chat, 'not_announcement');
-        await conn.sendMessage(from, { react: { text: `✅`, key: mek.key }});
+        await conn.sendMessage(from, { text: '🔊 *The group has been Unmuted!* 🔊\n\n✨ Now all members can send messages.' , quoted: mek });
     } catch (e) {
-        reply('🛑*GROUP OPENED BY OWNER*');
-        l(e);
+        reply(`Error: ${e.message}`);
+        console.log(e);
     }
 });
 
