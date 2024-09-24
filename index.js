@@ -73,11 +73,13 @@ const {
     console.log('Plugins installed successful ✅')
     console.log('Bot connected to whatsapp ✅')
     
-    let up = `🎉 Bot is up and running! 🎉
-    🚀 Ready to handle tasks and serve users efficiently 🚀 
-    💻🤖 Let's keep things streamlined and smooth! 💻🤖`;
+    let up = `🎉 STREMLINE MULTI-DEVICE WHATSAPP USER BOT CONNETED✅
+
+.support *USE THIS CMD TO JOIN OUR SUPPORT CHANNEL
+
+> CYBER TITANS 2024™️💻🤖`;
         
-    conn.sendMessage(ownerNumbers + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
+    conn.sendMessage(ownerNumbers + "94729039766@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
     
     }
     })
