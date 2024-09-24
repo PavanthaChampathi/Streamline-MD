@@ -50,16 +50,15 @@ cmd({
         let downloadUrl = down.dl_url;
 
         const desc = 
-`🌐 Streamline-MD 🌟
-🎧 Song Downloder 🎬 
+`🎧𝗦𝗧𝗥𝗘𝗔𝗠𝗟𝗜𝗡𝗘 𝗦𝗢𝗡𝗚 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗥🎧  
 
 🔎 Searching for: ${qser}
 🎥 Here’s what I found:
-
-Title       : ${data.title}
-Time        : ${data.timestamp}m
-Ago         : ${data.ago}
-Views       : ${formattedViews}
+┌───────────────────>
+│✑Title       : ${data.title}
+│✑Time        : ${data.timestamp}m
+│✑Ago         : ${data.ago}
+│✑Views       : ${formattedViews}
 🔗 Watch it here: ${url}
 
 📢 The voice message will be sent automatically.
