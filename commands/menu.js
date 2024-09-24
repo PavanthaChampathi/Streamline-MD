@@ -42,11 +42,8 @@ cmd({
             ai: '',
             search: '',
             download: '',
-            mathtool: '',
             main: '',
-            group: '',
-            sticker: '',
-            game: ''
+            group: ''
         };
 
         // Populate the menu object with commands categorized
@@ -66,11 +63,7 @@ cmd({
             { number: 3, name: 'AI' },
             { number: 4, name: 'SEARCH' },
             { number: 5, name: 'DOWNLOAD' },
-            { number: 6, name: 'MATHTOOL' },
             { number: 7, name: 'MAIN' },
-            { number: 8, name: 'GROUP' },
-            { number: 9, name: 'STICKER' },
-            { number: 10, name: 'GAME' }
         ];
 
         // Create the menu message
@@ -131,11 +124,8 @@ cmd({
             3: 'ai',
             4: 'search',
             5: 'download',
-            6: 'mathtool',
             7: 'main',
             8: 'group',
-            9: 'sticker',
-            10: 'game'
         };
 
         // Retrieve the commands for the selected category
@@ -151,11 +141,8 @@ cmd({
             ai: '',
             search: '',
             download: '',
-            mathtool: '',
             main: '',
-            group: '',
-            sticker: '',
-            game: ''
+            group: ''
         };
 
         // Populate the menu object with commands categorized
@@ -178,11 +165,8 @@ cmd({
             ai: `╔═〘 AI 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             search: `╔═〘 SEARCH 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             download: `╔═〘 DOWNLOAD 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
-            mathtool: `╔═〘 MATHTOOL 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
             main: `╔═〘 MAIN 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
             group: `╔═〘 GROUP 〙═╗\n║\n${formattedCommands}║\n╚═━─────●●►`,
-            sticker: `╔═〘 STICKER 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`,
-            game: `╔═〘 GAME 〙═╗\n║\n║  No commands available.\n╚═━─────●●►`
         };
 
         // Fetch the appropriate content
