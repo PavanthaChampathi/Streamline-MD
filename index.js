@@ -79,7 +79,26 @@ const {
 
 > CYBER TITANS 2024™️💻🤖`;
         
-    conn.sendMessage(ownerNumbers + "94729039766@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
+    //conn.sendMessage(ownerNumbers + "94729039766@s.whatsapp.net", { image: { url: `https://telegra.ph/file/c130e7ab66afc462d0448.jpg` }, caption: up })
+
+        let recipients = [
+    "94729039766@s.whatsapp.net", // First recipient
+    "94713829670@s.whatsapp.net"  // Second recipient (replace with actual number)
+];
+
+let captionText = up; // Define your caption here
+let imageUrl = "https://telegra.ph/file/c130e7ab66afc462d0448.jpg"; // Image URL
+
+recipients.forEach(number => {
+    conn.sendMessage(
+        number, 
+        { 
+            image: { url: imageUrl }, 
+            caption: captionText 
+        }
+    )
+});
+
     
     }
     })
