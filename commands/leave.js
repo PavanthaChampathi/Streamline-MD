@@ -18,7 +18,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         if(!isGroup){
             m.react("⛔")
-            .then(() => reply("⛔ *THIS IS AN OWNER COMMAND.*"))
+            .then(() => reply("⛔ *THIS COMMAND CAN ONLY BE USED IN GROUPS*"))
             return;
         }
             await reply("Goodbye! 👋");
