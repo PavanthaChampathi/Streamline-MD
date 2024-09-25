@@ -52,8 +52,8 @@ cmd({
         let downloadUrl = down.dl_url;
 
         const desc = 
-`🌐 Streamline-MD 🌟
-🎧 *YouTube Video Downloader* 🎬 
+`❍⚯────────────────⚯❍𝐒𝐓𝐑𝐄𝐀𝐌𝐋𝐈𝐍𝐄 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍❍⚯────────────────⚯❍
+   
 
 🔎 *Searching for*: ${q}
 🎥 *Found video:*
