@@ -19,6 +19,7 @@ cmd({
 
         // Fetch video details from Facebook
         let data = await fg.fbdl(q);
+        console.log(data)
         
         // Check if data was retrieved successfully
         if (!data || !data.url) {
