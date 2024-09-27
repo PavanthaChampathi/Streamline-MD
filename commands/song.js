@@ -44,7 +44,6 @@ cmd({
         const qser = q.startsWith('https://') ? q : `*_${q.toUpperCase()}_*`;
         // Download video
         let down = await fg.yta(url);
-        console.log(down);
         if (!down || !down.dl_url) return reply("Failed to get the download URL.");
         
         let downloadUrl = down.dl_url;
