@@ -5,7 +5,7 @@ const fg = require('api-dylux');
 
 cmd({
     pattern: "video",
-    desc: "Download High-Quality Videos From YouTube",
+    desc: "Download Videos From YouTube",
     category: "download",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
@@ -44,15 +44,15 @@ cmd({
 
         // Request high-quality video
         let down = await fg.ytv(url, '720p'); // Requesting 720p
-        console.log(down)
         if (!down || !down.dl_url) {
-            return reply("❌ *Failed to retrieve a high-quality download URL.*");
+            m.react("❌")
+            return reply("❌ *Failed to retrieve a download URL.*");
         }
 
         let downloadUrl = down.dl_url;
 
         const desc = 
-`❍⚯────────────────⚯❍𝐒𝐓𝐑𝐄𝐀𝐌𝐋𝐈𝐍𝐄 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍❍⚯────────────────⚯❍
+`🎥𝗦𝗧𝗥𝗘𝗔𝗠𝗟𝗜𝗡𝗘 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗥🎥
    
 
 🔎 *Searching for*: ${q}
@@ -72,6 +72,7 @@ ${config.BOTTOM_FOOTER}`;
     } catch (e) {
         // Error handling
         console.error(e);
-        reply(`❌ *Error*: ${e.message || e.toString()}`);
+        m.react("❌")
+        reply(`❌ *Error*: ${e}`);
     }
 });
