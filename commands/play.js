@@ -1,4 +1,4 @@
-/*const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const { cmd, commands } = require('../command');
 const config = require('../config');
@@ -6,7 +6,7 @@ const yts = require('yt-search');
 const fg = require('api-dylux');
 
 const menuMessageIds = new Map(); // Track the message IDs to check replies
-const downloadData = new Map(); // Store download data (e.g., URLs) for each conversation
+const downloadUrls = new Map(); // Store download data (e.g., URLs) for each conversation
 
 // Helper function to format numbers for views
 const formatNumber = (num) => {
@@ -46,8 +46,7 @@ cmd({
 
         // Build the description
         const desc = 
-`🌐 Streamline-MD 🌟
-🎧 YT SEARCH 🎬 
+`🎥𝗦𝗧𝗥𝗘𝗔𝗠𝗟𝗜𝗡𝗘 𝗦𝗢𝗡𝗚 & 𝗩𝗜𝗗𝗘𝗢 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗥🎥
     
 🔎 Searching for: ${qser}
 🎥 Here’s what I found:
@@ -69,13 +68,9 @@ ${config.BOTTOM_FOOTER}`;
 
         // Send message with search result and track its ID
         const searchMessage = await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
-        let down = await fg.yta(url); // Await the promise returned by fg.yta
-        if (!down || !down.dl_url) return reply("Failed to get the download URL.");
 
-        // Store the download data for this conversation
-        downloadData.set(from, down);
+        downloadUrls.set(from, url);
 
-        // Save the message ID to check replies
         menuMessageIds.set(from, searchMessage.key.id);
 
     } catch (e) {
@@ -98,43 +93,35 @@ cmd({
         }
 
         // Retrieve the stored download data for this conversation
-        const down = downloadData.get(from);
-        if (!down || !down.dl_url) return reply("No download data available.");
+        const dataurl = downloadUrls.get(from);
+        if (!dataurl) return reply("No download data available.");
+
+        let downa = await fg.yta(dataurl);
+        if (!downa || !downa.dl_url) return reply("Failed to download audio.");
+
+        let downv = await fg.ytv(dataurl);
+        if (!downv || !downv.dl_url) return reply("Failed to download video.");
 
         // Handle the user's choice for downloading audio/video based on the reply
         switch (selectedOption) {
             case 1:
-                // Handle Audio download
                 reply("🎶 Downloading Audio...");
-                await conn.sendMessage(from, { audio: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio file!" }, { quoted: m });
+                await conn.sendMessage(from, { audio: { url: downa.dl_url }, mimetype: 'audio/mpeg', }, { quoted: m });
                 break;
 
             case 2:
-                // Handle Video download
                 reply("🎬 Downloading Video...");
-                let video = await fg.ytv(down.dl_url); // Download video using the same URL
-                if (video && video.dl_url) {
-                    await conn.sendMessage(from, { video: { url: video.dl_url }, mimetype: 'video/mp4', caption: "Here's your video file!" }, { quoted: m });
-                } else {
-                    reply("Failed to download video.");
-                }
+                await conn.sendMessage(from, { video: { url: downv.dl_url }, mimetype: 'video/mp4', caption: "Here's your video file!" }, { quoted: m });
                 break;
 
             case 3:
-                // Handle Audio Document
                 reply("🎵 Preparing Audio Doc...");
-                await conn.sendMessage(from, { document: { url: down.dl_url }, mimetype: 'audio/mpeg', caption: "Here's your audio document!" }, { quoted: m });
+                await conn.sendMessage(from, { document: { url: downa.dl_url }, mimetype: "audio/mpeg" , fileName:downa.title+".mp3"},{ quoted: mek });
                 break;
 
             case 4:
-                // Handle Video Document
                 reply("📹 Preparing Video Doc...");
-                let videoDoc = await fg.ytv(down.dl_url); // Get video for doc using the same URL
-                if (videoDoc && videoDoc.dl_url) {
-                    await conn.sendMessage(from, { document: { url: videoDoc.dl_url }, mimetype: 'video/mp4', caption: "Here's your video document!" }, { quoted: m });
-                } else {
-                    reply("Failed to prepare video document.");
-                }
+                await conn.sendMessage(from, { document: { url: downv.dl_url }, mimetype: "video/mp4" , fileName:downv.title+".mp4"},{ quoted: mek });
                 break;
 
             default:
@@ -146,4 +133,4 @@ cmd({
         console.error(e);
         reply(`Error: ${e.message}`);
     }
-});*/
+});
