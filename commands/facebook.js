@@ -3,8 +3,9 @@ const config = require('../config');
 const fg = require('api-dylux');
 
 cmd({
-    pattern: "fbvideo",
-    desc: "Download High-Quality Videos From Facebook",
+    pattern: "fb",
+    alias: ["fbvideo", "fbdl"],
+    desc: "Download Videos From Facebook",
     category: "download",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
@@ -18,27 +19,18 @@ cmd({
         m.react("🎬")
 
         // Fetch video details from Facebook
-        let data = await fg.fbdl(q);
-        console.log(data)
+        let data = await fg.fbdl(q)
         
         // Check if data was retrieved successfully
-        if (!data || !data.url) {
-            return reply("❌ *Failed to retrieve a download URL.* Please check the Facebook URL.");
+        if (!data || !data.videoUrl) {
+            m.react("❌")
+            .than()( reply("❌ *Failed to retrieve a download URL.* Please check the Facebook URL."))
+            return ;
         }
 
-        let downloadUrl = data.url; // Video download link
-        let videoInfo = data.meta;  // Metadata like title, duration, etc.
+        let downloadUrl = data.videoUrl; // Video download link
         
-        const desc = 
-`❍⚯────────────────⚯❍𝐒𝐓𝐑𝐄𝐀𝐌𝐋𝐈𝐍𝐄 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍❍⚯────────────────⚯❍
-
-🎥 *Facebook Video Found:*
-
-*Title*: ${videoInfo.title || "N/A"}
-*Duration*: ${videoInfo.duration || "N/A"} mins
-🔗 *Watch here*: ${q}
-
-${config.BOTTOM_FOOTER}`;
+        const desc = `${config.BOTTOM_FOOTER}`;
 
         // Send video with download URL
         await conn.sendMessage(from, { video: { url: downloadUrl }, caption: desc, mimetype: 'video/mp4' }, { quoted: m });
@@ -46,6 +38,7 @@ ${config.BOTTOM_FOOTER}`;
     } catch (e) {
         // Error handling
         console.error(e);
-        reply(`❌ *Error*: ${e.message || e.toString()}`);
+        m.react("❌")
+        reply(`❌ *Error*: ${e}`);
     }
 });
