@@ -14,7 +14,7 @@ function convertToBool(text, fault = 'true') {
 // Export configuration settings
 module.exports = {
 
-    SESSION_ID: process.env.SESSION_ID || "azAT2aya#p263sVeklUpNUSfOJmkWlRgAyLIBlHDNzBAyePN6TxA",
+    SESSION_ID: process.env.SESSION_ID || "ADD YOUR SESSION ID HERE",
 
     MONGODB: process.env.MONGODB || "//mongo:thVCdVUqJrvFHcejdnDFcpLEDaVaedsd@junction.proxy.rlwy.net:26885",
 
