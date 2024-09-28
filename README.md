@@ -7,7 +7,7 @@
     <img src="https://i.imgur.com/dBaSKWF.gif" height="90" width="100%">
 
 
-**STREAMLINE-MD** is an user bot for WhatsApp that allowing you to get done so many tasks. This project mainly focusing on make user's work easy. This project coded with Javascript and Docker. And using **[Baileys](https://github.com/adiwajshing/Baileys)** as the WA Web API. Developer or Team members are not responsible for your usage mistakes and not using wisely. Also, you have no authorities do any modifications to this project. Enjoy!🎈
+**STREAMLINE-MD** is an user bot for WhatsApp that allowing you to get done so many tasks. This project mainly focusing on make user's work easy. This project coded with Javascript and Docker. And using **[Baileys](https://github.com/adiwajshing/Baileys)** as the WA Web API. Developer or Team members are not responsible for your usage mistakes and not using wisely. Also, you have no authorities do any modifications to this project. Enjoy!.🎈
 
 ## ❄️ ꜱᴛʀᴇᴀᴍʟɪɴᴇ  ᴍᴅ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ ❄️ 
 
